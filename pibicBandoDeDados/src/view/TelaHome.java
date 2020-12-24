@@ -10,6 +10,7 @@ import dto.Paciente;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+//import view.TelaPaciente;
 
 /**
  *
@@ -17,11 +18,19 @@ import javax.swing.JOptionPane;
  */
 public class TelaHome extends javax.swing.JFrame {
 
+    private TelaPaciente tela;
+
     /**
      * Creates new form TelaHome
      */
     public TelaHome() {
         initComponents();
+    }
+
+    //construtor para mostrar dados do paciente 
+    public TelaHome(TelaPaciente t) {
+        this.tela = t;
+
     }
 
     /**
@@ -182,7 +191,9 @@ public class TelaHome extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void PesquisarPaciente() {
+
         try {
+
             String cpf, nome_paciente;
 
             nome_paciente = txtNome.getText();
@@ -196,21 +207,59 @@ public class TelaHome extends javax.swing.JFrame {
             PacienteDAO pacienteDAO = new PacienteDAO();
 
             ResultSet rsPacienteDAO = pacienteDAO.pesquisarPaciente(pacienteDTO);
-            
 
             if (rsPacienteDAO.next()) {
-              
-                TelaPaciente telaPaciente = new TelaPaciente();
-                telaPaciente.setVisible(true);
+
+                // monstrar dados do paciente
+                try {
+                    if (pacienteDAO.mostrarPaciente(pacienteDTO)) {
+
+                        if (pacienteDTO != null) {
+
+                            TelaPaciente t = new TelaPaciente();
+                            
+                            String n = pacienteDTO.getNome();
+                            String c = pacienteDTO.getCpf();
+                            
+                            t.mostrarValores(n, c);
+
+                            t.setVisible(true);
+                        }
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Erro na procura dos dados");
+                }
+
                 dispose();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Dados incorretos");
             }
-            
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "TelaHome Pesquisar Paciente: " + e);
         }
-
     }
+
+    //TESTE
+    public void mostrarPaciente(Paciente objPaciente) {
+
+        /*PacienteDAO pacienteDAO = new PacienteDAO();
+        
+        try {
+
+            //mostrar dados do paciente cadastrado 
+            if (pacienteDAO.pesquisarPaciente(pacienteDTO)) {
+                if (pacienteDAO != null) {
+                    telaPaciente.t
+                }
+            }
+
+            dispose();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Dados incorretos");
+        }*/
+    }
+
 }
