@@ -53,8 +53,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="jTextField3" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="txtCPF" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="jTextField4" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="jTextField5" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
                           <Component id="jTextField6" alignment="2" min="-2" pref="120" max="-2" attributes="0"/>
@@ -80,12 +80,12 @@
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -157,12 +157,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txtNome">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="txtCPF">
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">
     </Component>
