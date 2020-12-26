@@ -5,15 +5,14 @@
  */
 package view;
 
+import dao.ExameDAO;
 import dao.PacienteDAO;
+import dto.Exame;
 import dto.Paciente;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -46,6 +45,9 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -60,19 +62,26 @@ public class TelaCadastro extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        txtX = new javax.swing.JTextField();
+        txtY = new javax.swing.JTextField();
+        txtRaio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         lblImagem = new javax.swing.JLabel();
         btnAdicionarImagem = new javax.swing.JButton();
         txtNomeCaminho = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jSeparator1 = new javax.swing.JSeparator();
+        rbtnCarF = new javax.swing.JRadioButton();
+        rbtnCarG = new javax.swing.JRadioButton();
+        rbtnCarD = new javax.swing.JRadioButton();
+        rbtnGravB = new javax.swing.JRadioButton();
+        rbtnGravM = new javax.swing.JRadioButton();
+        rbtnClassCalc = new javax.swing.JRadioButton();
+        rbtnClassCirc = new javax.swing.JRadioButton();
+        rbtnClassSpic = new javax.swing.JRadioButton();
+        rbtnClassMisc = new javax.swing.JRadioButton();
+        rbtnClassArch = new javax.swing.JRadioButton();
+        rbtnClassAsym = new javax.swing.JRadioButton();
+        rbtnClassNorm = new javax.swing.JRadioButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setExtendedState(6);
@@ -129,69 +138,63 @@ public class TelaCadastro extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton1.setText("jRadioButton1");
+        buttonGroup1.add(rbtnCarF);
+        rbtnCarF.setText("F - Fatty");
 
-        jRadioButton2.setText("jRadioButton2");
+        buttonGroup1.add(rbtnCarG);
+        rbtnCarG.setText("G - Fatty-glandular");
 
-        jRadioButton3.setText("jRadioButton3");
+        buttonGroup1.add(rbtnCarD);
+        rbtnCarD.setText("D - Dense-glandular");
+        rbtnCarD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnCarDActionPerformed(evt);
+            }
+        });
 
-        jRadioButton4.setText("jRadioButton4");
+        buttonGroup3.add(rbtnGravB);
+        rbtnGravB.setText("B - Benign");
 
-        jRadioButton5.setText("jRadioButton5");
+        buttonGroup3.add(rbtnGravM);
+        rbtnGravM.setText(" M - Malignant");
+
+        buttonGroup2.add(rbtnClassCalc);
+        rbtnClassCalc.setText("CALC ");
+
+        buttonGroup2.add(rbtnClassCirc);
+        rbtnClassCirc.setText("CIRC");
+
+        buttonGroup2.add(rbtnClassSpic);
+        rbtnClassSpic.setText("SPIC");
+        rbtnClassSpic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnClassSpicActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(rbtnClassMisc);
+        rbtnClassMisc.setText("MISC");
+
+        buttonGroup2.add(rbtnClassArch);
+        rbtnClassArch.setText("ARCH");
+
+        buttonGroup2.add(rbtnClassAsym);
+        rbtnClassAsym.setText("ASYM");
+        rbtnClassAsym.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnClassAsymActionPerformed(evt);
+            }
+        });
+
+        buttonGroup2.add(rbtnClassNorm);
+        rbtnClassNorm.setText("NORM");
+
+        jLabel3.setText("Coodenadas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(btnCadastrar)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnAdicionarImagem)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblGravidadeDaFormalidade)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton5))
-                        .addGap(63, 63, 63)
-                        .addComponent(lblClasseDaNormalidade))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCaracteristicaDoTecido)
-                                    .addComponent(jRadioButton1))
-                                .addGap(18, 18, 18)
-                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblX)
-                            .addComponent(lblY)
-                            .addComponent(lblRaio))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 68, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,83 +208,157 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                             .addComponent(txtCPF))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCadastrar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(btnAdicionarImagem)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2))))
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCaracteristicaDoTecido)
+                            .addComponent(rbtnCarG)
+                            .addComponent(rbtnCarF)
+                            .addComponent(rbtnCarD))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbtnClassNorm)
+                            .addComponent(rbtnClassArch)
+                            .addComponent(rbtnClassAsym)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rbtnClassMisc)
+                                    .addComponent(rbtnClassSpic)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblClasseDaNormalidade)
+                                            .addComponent(rbtnClassCalc)
+                                            .addComponent(rbtnClassCirc))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rbtnGravM)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(lblGravidadeDaFormalidade)
+                                                .addComponent(rbtnGravB)))))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblX)
+                                            .addComponent(lblY)
+                                            .addComponent(lblRaio))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txtY, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtRaio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addGap(61, 61, 61)
-                .addComponent(jLabel5)
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel5)
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNome)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14)
                         .addComponent(lblCPF))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(100, 100, 100)
                         .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(51, 51, 51)
+                .addGap(42, 42, 42)
                 .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnAdicionarImagem)
-                                .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblClasseDaNormalidade)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassCalc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassCirc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassSpic)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassMisc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassArch)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassAsym)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassNorm))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCaracteristicaDoTecido)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnCarF)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnCarG)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnCarD))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblGravidadeDaFormalidade)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblCaracteristicaDoTecido)
+                                        .addComponent(rbtnGravB)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(30, 30, 30)
-                                                .addComponent(jRadioButton2)
-                                                .addGap(1, 1, 1)
-                                                .addComponent(jRadioButton3))
-                                            .addComponent(jRadioButton1)))
+                                        .addComponent(rbtnGravM))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(lblX)
-                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
+                                        .addGap(62, 62, 62)
+                                        .addComponent(txtRaio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblX)
+                                            .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(lblY)
-                                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblRaio))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(76, 76, 76)
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblGravidadeDaFormalidade)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRadioButton4)
+                                            .addComponent(txtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jRadioButton5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(108, 108, 108)
-                                        .addComponent(lblClasseDaNormalidade)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)))
-                .addComponent(btnCadastrar)
-                .addContainerGap())
+                                        .addComponent(lblRaio)))))
+                        .addGap(65, 65, 65)
+                        .addComponent(btnCadastrar)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnAdicionarImagem)
+                                .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                        .addGap(38, 38, 38))))
         );
 
-        setSize(new java.awt.Dimension(1087, 635));
+        setSize(new java.awt.Dimension(1143, 635));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,32 +368,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
-
-        try {
-            String nome, cpf;
-
-            nome = (txtNome.getText()).toUpperCase();
-            cpf = txtCPF.getText();
-
-            Paciente paciente = new Paciente();
-
-            paciente.setNome(nome);
-            paciente.setCpf(cpf);
-
-            PacienteDAO pacientedao = new PacienteDAO();
-            pacientedao.cadastrarPaciente(paciente);
-
-            //pegando somente o nome da imagem
-            int tam = fileName.lastIndexOf("\\");
-            fileName = fileName.substring(tam + 1);
-
-            //salvando na pasta imagens
-            ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
-            JOptionPane.showMessageDialog(rootPane, "Imagem enviada com sucesso");
-
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "TelaCadastro | cadastrar " + e);
-        }
+        Cadastrar();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtNomeCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeCaminhoActionPerformed
@@ -363,6 +415,18 @@ public class TelaCadastro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAdicionarImagemActionPerformed
 
+    private void rbtnCarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCarDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnCarDActionPerformed
+
+    private void rbtnClassSpicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnClassSpicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnClassSpicActionPerformed
+
+    private void rbtnClassAsymActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnClassAsymActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnClassAsymActionPerformed
+
     String fileName;
     BufferedImage imagem;
 
@@ -405,20 +469,15 @@ public class TelaCadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarImagem;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCaracteristicaDoTecido;
     private javax.swing.JLabel lblClasseDaNormalidade;
@@ -428,8 +487,127 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel lblRaio;
     private javax.swing.JLabel lblX;
     private javax.swing.JLabel lblY;
+    private javax.swing.JRadioButton rbtnCarD;
+    private javax.swing.JRadioButton rbtnCarF;
+    private javax.swing.JRadioButton rbtnCarG;
+    private javax.swing.JRadioButton rbtnClassArch;
+    private javax.swing.JRadioButton rbtnClassAsym;
+    private javax.swing.JRadioButton rbtnClassCalc;
+    private javax.swing.JRadioButton rbtnClassCirc;
+    private javax.swing.JRadioButton rbtnClassMisc;
+    private javax.swing.JRadioButton rbtnClassNorm;
+    private javax.swing.JRadioButton rbtnClassSpic;
+    private javax.swing.JRadioButton rbtnGravB;
+    private javax.swing.JRadioButton rbtnGravM;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeCaminho;
+    private javax.swing.JTextField txtRaio;
+    private javax.swing.JTextField txtX;
+    private javax.swing.JTextField txtY;
     // End of variables declaration//GEN-END:variables
+
+    private void Cadastrar() {
+        try {
+            String nome, cpf, caracteristicatecido, classeanormalidade, gravidadeanormalidade, stringX, stringY, stringRaio;
+            Integer x, y, raio;
+            boolean open;
+
+            
+            //pegando os dados do paciente
+            nome = (txtNome.getText()).toUpperCase();
+            cpf = txtCPF.getText();
+
+            Paciente paciente = new Paciente();
+
+            paciente.setNome(nome);
+            paciente.setCpf(cpf);
+
+          
+            //pegando os dados do exame 
+            if (rbtnCarF.isSelected()) {
+                caracteristicatecido = "F";
+            } else if (rbtnCarG.isSelected()) {
+                caracteristicatecido = "G";
+            } else {
+                caracteristicatecido = "D";
+            }
+
+            if (rbtnClassCalc.isSelected()) {
+                classeanormalidade = "CALC";
+            } else if (rbtnClassCirc.isSelected()) {
+                classeanormalidade = "CIRC";
+            } else if (rbtnClassSpic.isSelected()) {
+                classeanormalidade = "SPIC";
+            } else if (rbtnClassMisc.isSelected()) {
+                classeanormalidade = "MISC";
+            } else if (rbtnClassArch.isSelected()) {
+                classeanormalidade = "ARCH";
+            } else if (rbtnClassAsym.isSelected()) {
+                classeanormalidade = "ASYM";
+            } else {
+                classeanormalidade = "NORM";
+            }
+
+            
+            if (rbtnGravB.isSelected()) {
+                gravidadeanormalidade = "B";
+                open = true;//?
+            } else if (rbtnGravM.isSelected()) {
+                gravidadeanormalidade = "M";
+                open = true;//?
+            } else {
+                gravidadeanormalidade = "";
+                open = false;//?
+                
+            }
+
+            stringX = txtX.getText();
+            stringY = txtY.getText();
+            stringRaio = txtRaio.getText();
+
+            if (stringX.isEmpty()) {
+                x = null;
+            } else {
+                x = Integer.parseInt(stringX);
+            }
+
+            if (stringY.isEmpty()) {
+                y = null;
+            } else {
+                y = Integer.parseInt(stringY);
+            }
+
+            if (stringRaio.isEmpty()) {
+                raio = null;
+            } else {
+                raio = Integer.parseInt(stringRaio);
+            }
+
+            Exame exame = new Exame();
+
+            exame.setCaracteristicatecido(caracteristicatecido);
+            exame.setClasseanormalidade(classeanormalidade);
+            exame.setGravidadeanormalidade(gravidadeanormalidade);
+            exame.setX(x);
+            exame.setY(y);
+            exame.setRaio(raio);
+
+            //importando tudo para o PacienteDAO
+            PacienteDAO pacientedao = new PacienteDAO();
+            pacientedao.cadastrarPaciente(paciente, exame);
+
+            //pegando somente o nome da imagem
+            int tam = fileName.lastIndexOf("\\");
+            fileName = fileName.substring(tam + 1);
+
+            //salvando na pasta imagens
+            ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
+            JOptionPane.showMessageDialog(rootPane, "Imagem enviada com sucesso");
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "TelaCadastro | cadastrar " + e);
+        }
+    }
+
 }
