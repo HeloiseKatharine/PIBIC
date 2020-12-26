@@ -4,6 +4,15 @@ public class Paciente {
 
     private String cpf, nome;
     private int id_paciente;
+    private int id_exame;
+
+    public int getId_exame() {
+        return id_exame;
+    }
+
+    public void setId_exame(int id_exame) {
+        this.id_exame = id_exame;
+    }
 
     public String getCpf() {
         return cpf;
