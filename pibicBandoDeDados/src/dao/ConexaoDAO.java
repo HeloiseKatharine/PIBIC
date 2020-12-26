@@ -17,7 +17,7 @@ public class ConexaoDAO {
         
         try {
         
-            String url = "jdbc:mysql://localhost:3306/mamografia?user=root&password=root" ;
+            String url = "jdbc:mysql://localhost:3306/mamo?user=root&password=root" ;
             /*?useTimezone=true&serverTimezone=UTC*/
             /*Drive de conexão | local da base de dados | nome do banco | usuario | senha*/
             conn = DriverManager.getConnection(url);
