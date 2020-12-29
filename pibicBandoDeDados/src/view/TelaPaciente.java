@@ -5,9 +5,19 @@
  */
 package view;
 
+import dao.PacienteDAO;
+import dto.Exame;
+import dto.Paciente;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author heloh
+ * @author Heloise
  */
 public class TelaPaciente extends javax.swing.JFrame {
 
@@ -16,6 +26,7 @@ public class TelaPaciente extends javax.swing.JFrame {
      */
     public TelaPaciente() {
         initComponents();
+
     }
 
     /**
@@ -27,69 +38,314 @@ public class TelaPaciente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        lblRaio = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
+        lblGravidadeDaFormalidade = new javax.swing.JLabel();
+        rbtnGravB = new javax.swing.JRadioButton();
+        rbtnGravM = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        btnPesquisar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
-        lblCodigo = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaExame = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        btnEditar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        PainelCadastro = new javax.swing.JPanel();
+        btnAdicionarImagem = new javax.swing.JButton();
+        txtNomeCaminho = new javax.swing.JTextField();
+        lblImagem = new javax.swing.JLabel();
+        rbtnCarF = new javax.swing.JRadioButton();
+        rbtnCarG = new javax.swing.JRadioButton();
+        rbtnCarD = new javax.swing.JRadioButton();
         lblCaracteristicaDoTecido = new javax.swing.JLabel();
+        rbtnClassSpic = new javax.swing.JRadioButton();
+        rbtnClassMisc = new javax.swing.JRadioButton();
+        rbtnClassArch = new javax.swing.JRadioButton();
+        rbtnClassAsym = new javax.swing.JRadioButton();
+        rbtnClassNorm = new javax.swing.JRadioButton();
+        rbtnClassCalc = new javax.swing.JRadioButton();
+        rbtnClassCirc = new javax.swing.JRadioButton();
         lblClasseDaNormalidade = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        lblGravidadeDaFormalidade = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        btnAdicionar = new javax.swing.JButton();
+        rbtnGravB1 = new javax.swing.JRadioButton();
+        rbtnGravM1 = new javax.swing.JRadioButton();
+        lblGravidadeDaFormalidade1 = new javax.swing.JLabel();
+        lblX = new javax.swing.JLabel();
+        lblY = new javax.swing.JLabel();
+        lblRaio = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtX = new javax.swing.JTextField();
+        txtY = new javax.swing.JTextField();
+        txtRaio = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+
+        lblGravidadeDaFormalidade.setText("Gravidade da formalidade:");
+
+        rbtnGravB.setText("B - Benign");
+
+        rbtnGravM.setText(" M - Malignant");
+
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setExtendedState(6);
 
-        lblRaio.setText("Raio:");
-
-        jLabel9.setText("Adicionar um exame:");
-
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setText("Abrir Exame");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
+        txtNome.setForeground(new java.awt.Color(0, 0, 0));
+        txtNome.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
             }
         });
 
+        txtCPF.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tela Paciente");
 
         lblNome.setText("Nome do paciente:");
 
         lblCPF.setText("CPF:");
 
-        lblCodigo.setText("Código:");
-
         jLabel5.setText("Informações do  paciente:");
+
+        btnExcluir.setText("Excluir Exame");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        tabelaExame.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Imagem", "Carac. do tecido", "Classe", "Gravidade", "X", "Y", "Raio"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaExame);
+
+        jLabel2.setText("Exames do paciente:");
+
+        btnEditar.setText("Editar informações");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Adicionar Exame");
+
+        btnAdicionarImagem.setText("Add");
+        btnAdicionarImagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarImagemActionPerformed(evt);
+            }
+        });
+
+        txtNomeCaminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeCaminhoActionPerformed(evt);
+            }
+        });
+
+        rbtnCarF.setText("F - Fatty");
+
+        rbtnCarG.setText("G - Fatty-glandular");
+
+        rbtnCarD.setText("D - Dense-glandular");
+        rbtnCarD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnCarDActionPerformed(evt);
+            }
+        });
 
         lblCaracteristicaDoTecido.setText("Caracteristica do tecido: ");
 
-        lblClasseDaNormalidade.setText("Classe da normalidade:");
-
-        lblGravidadeDaFormalidade.setText("Gravidade da formalidade:");
-
-        btnAdicionar.setText("Adicionar");
-        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+        rbtnClassSpic.setText("SPIC");
+        rbtnClassSpic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarActionPerformed(evt);
+                rbtnClassSpicActionPerformed(evt);
             }
         });
+
+        rbtnClassMisc.setText("MISC");
+
+        rbtnClassArch.setText("ARCH");
+
+        rbtnClassAsym.setText("ASYM");
+        rbtnClassAsym.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnClassAsymActionPerformed(evt);
+            }
+        });
+
+        rbtnClassNorm.setText("NORM");
+
+        rbtnClassCalc.setText("CALC ");
+
+        rbtnClassCirc.setText("CIRC");
+
+        lblClasseDaNormalidade.setText("Classe da normalidade:");
+
+        rbtnGravB1.setText("B - Benign");
+
+        rbtnGravM1.setText(" M - Malignant");
+
+        lblGravidadeDaFormalidade1.setText("Gravidade da formalidade:");
+
+        lblX.setText("X:");
+
+        lblY.setText("Y:");
+
+        lblRaio.setText("Raio:");
+
+        jLabel3.setText("Coodenadas");
+
+        jButton4.setText("jButton4");
+
+        javax.swing.GroupLayout PainelCadastroLayout = new javax.swing.GroupLayout(PainelCadastro);
+        PainelCadastro.setLayout(PainelCadastroLayout);
+        PainelCadastroLayout.setHorizontalGroup(
+            PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCadastroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lblImagem, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PainelCadastroLayout.createSequentialGroup()
+                        .addComponent(btnAdicionarImagem)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(320, Short.MAX_VALUE))
+            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                .addGap(287, 287, 287)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCaracteristicaDoTecido)
+                    .addComponent(rbtnCarG)
+                    .addComponent(rbtnCarF)
+                    .addComponent(rbtnCarD))
+                .addGap(18, 18, 18)
+                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                        .addComponent(rbtnClassNorm)
+                        .addGap(130, 130, 130))
+                    .addComponent(rbtnClassArch)
+                    .addComponent(rbtnClassAsym)
+                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblClasseDaNormalidade)
+                            .addComponent(rbtnClassCalc)
+                            .addComponent(rbtnClassMisc)
+                            .addComponent(rbtnClassSpic)
+                            .addComponent(rbtnClassCirc))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbtnGravM1)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblGravidadeDaFormalidade1)
+                                .addComponent(rbtnGravB1)))
+                        .addGap(18, 18, 18)
+                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblX)
+                                    .addComponent(lblY)
+                                    .addComponent(lblRaio))
+                                .addGap(18, 18, 18)
+                                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtY, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRaio, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+        PainelCadastroLayout.setVerticalGroup(
+            PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdicionarImagem)
+                    .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                        .addComponent(lblCaracteristicaDoTecido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnCarF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnCarG)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnCarD))
+                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                        .addComponent(lblClasseDaNormalidade)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbtnClassCalc)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbtnClassCirc))
+                                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                        .addComponent(lblGravidadeDaFormalidade1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rbtnGravB1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rbtnGravM1)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassSpic)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbtnClassMisc))
+                            .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                        .addGap(62, 62, 62)
+                                        .addComponent(txtRaio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PainelCadastroLayout.createSequentialGroup()
+                                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblX)
+                                            .addComponent(txtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(lblY)
+                                            .addComponent(txtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblRaio)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnClassArch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnClassAsym)
+                        .addGap(10, 10, 10)
+                        .addComponent(rbtnClassNorm)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,47 +353,42 @@ public class TelaPaciente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(279, 279, 279)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel1)
-                            .addComponent(btnCadastrar))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAdicionar))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel9)
+                        .addComponent(jLabel5)
+                        .addGap(13, 13, 13))
+                    .addComponent(btnEditar)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblCaracteristicaDoTecido)
-                            .addComponent(lblClasseDaNormalidade)
-                            .addComponent(lblGravidadeDaFormalidade)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(lblRaio))
                             .addComponent(lblNome)
-                            .addComponent(lblCPF)
-                            .addComponent(lblCodigo))
+                            .addComponent(lblCPF))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNome)
+                            .addComponent(txtCPF)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPesquisar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(193, Short.MAX_VALUE))
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PainelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(23, 23, 23)
@@ -148,55 +399,63 @@ public class TelaPaciente extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCPF)
                             .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCodigo)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCaracteristicaDoTecido)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblClasseDaNormalidade)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblGravidadeDaFormalidade)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRaio)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrar)
-                    .addComponent(btnAdicionar))
-                .addGap(23, 23, 23))
+                            .addComponent(btnPesquisar)
+                            .addComponent(jButton1)
+                            .addComponent(btnExcluir)))
+                    .addComponent(PainelCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(38, 38, 38))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1309, 665));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+        CarregarExame();
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAdicionarActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        // TODO add your handling code here:
+        EditarPaciente();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void rbtnClassAsymActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnClassAsymActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnClassAsymActionPerformed
+
+    private void rbtnClassSpicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnClassSpicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnClassSpicActionPerformed
+
+    private void rbtnCarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCarDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnCarDActionPerformed
+
+    private void txtNomeCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeCaminhoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeCaminhoActionPerformed
+
+    private void btnAdicionarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarImagemActionPerformed
+        // TODO add your handling code here:
+        //AdicionaImagem();
+    }//GEN-LAST:event_btnAdicionarImagemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,31 +496,122 @@ public class TelaPaciente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JPanel PainelCadastro;
+    private javax.swing.JButton btnAdicionarImagem;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCaracteristicaDoTecido;
     private javax.swing.JLabel lblClasseDaNormalidade;
-    private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblGravidadeDaFormalidade;
+    private javax.swing.JLabel lblGravidadeDaFormalidade1;
+    private javax.swing.JLabel lblImagem;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblRaio;
+    private javax.swing.JLabel lblX;
+    private javax.swing.JLabel lblY;
+    private javax.swing.JRadioButton rbtnCarD;
+    private javax.swing.JRadioButton rbtnCarF;
+    private javax.swing.JRadioButton rbtnCarG;
+    private javax.swing.JRadioButton rbtnClassArch;
+    private javax.swing.JRadioButton rbtnClassAsym;
+    private javax.swing.JRadioButton rbtnClassCalc;
+    private javax.swing.JRadioButton rbtnClassCirc;
+    private javax.swing.JRadioButton rbtnClassMisc;
+    private javax.swing.JRadioButton rbtnClassNorm;
+    private javax.swing.JRadioButton rbtnClassSpic;
+    private javax.swing.JRadioButton rbtnGravB;
+    private javax.swing.JRadioButton rbtnGravB1;
+    private javax.swing.JRadioButton rbtnGravM;
+    private javax.swing.JRadioButton rbtnGravM1;
+    private javax.swing.JTable tabelaExame;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtNomeCaminho;
+    private javax.swing.JTextField txtRaio;
+    private javax.swing.JTextField txtX;
+    private javax.swing.JTextField txtY;
     // End of variables declaration//GEN-END:variables
 
-    public void mostrarValores(String nome, String cpf) {
+    public Integer id;
+
+    public void mostrarValores(String nome, String cpf, String carcTecido, String classNorm, String gravForm, Integer x, Integer y, Integer raio, ArrayList<Exame> lista, Integer id_paciente) {
         txtNome.setText(nome);
         txtCPF.setText(cpf);
+        id = id_paciente;
+        
+        /*txtCarcTecido.setText(carcTecido);
+        txtClassNorm.setText(classNorm);
+        txtGravForm.setText(gravForm);
+        txtX.setText(Integer.toString(x));
+        txtY.setText(Integer.toString(y));
+        txtRaio.setText(Integer.toString(raio));*/
+
+        PacienteDAO pacienteDAO = new PacienteDAO();
+
+        DefaultTableModel model = (DefaultTableModel) tabelaExame.getModel();
+        model.setNumRows(0);
+
+        for (int i = 0; i < lista.size(); i++) {
+            model.addRow(new Object[]{
+                lista.get(i).getNomeimagem(),
+                lista.get(i).getCaracteristicatecido(),
+                lista.get(i).getClasseanormalidade(),
+                lista.get(i).getGravidadeanormalidade(),
+                lista.get(i).getRaio(),
+                lista.get(i).getX(),
+                lista.get(i).getY()
+            });
+        }
+    }
+
+    private void CarregarExame() {
+        try {
+
+            String nome;
+
+            int setar = tabelaExame.getSelectedRow();
+
+            nome = tabelaExame.getModel().getValueAt(setar, 0).toString();
+
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(new File("..\\imagens\\" + nome));
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "TelaPaciente " + e);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "TelaPaciente " + e);
+        }
+    }
+
+    private void EditarPaciente() {
+        
+        String nome;
+        String cpf;
+        
+        nome = txtNome.getText().toUpperCase();
+        cpf = txtCPF.getText();
+        
+
+        Paciente pacienteDTO = new Paciente();
+        
+        pacienteDTO.setNome(nome);
+        pacienteDTO.setCpf(cpf);
+        pacienteDTO.setId_paciente(id);
+        
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        pacienteDAO.EditarPaciente(pacienteDTO);
     }
 }
