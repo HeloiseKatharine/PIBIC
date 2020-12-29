@@ -14,6 +14,7 @@ public class Exame {
     private String caracteristicatecido;
     private String classeanormalidade;
     private String gravidadeanormalidade;
+    private String nomeimagem;
     private Integer x;
     private Integer y;
     private Integer raio;
@@ -84,4 +85,13 @@ public class Exame {
     public void setPaciente_cpf(int paciente_cpf) {
         this.paciente_cpf = paciente_cpf;
     }
+
+    public String getNomeimagem() {
+        return nomeimagem;
+    }
+
+    public void setNomeimagem(String nomeimagem) {
+        this.nomeimagem = nomeimagem;
+    }
+
 }
