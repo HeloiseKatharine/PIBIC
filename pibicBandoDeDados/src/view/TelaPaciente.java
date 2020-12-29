@@ -83,6 +83,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         txtY = new javax.swing.JTextField();
         txtRaio = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        btnExcluirPaciente = new javax.swing.JButton();
 
         lblGravidadeDaFormalidade.setText("Gravidade da formalidade:");
 
@@ -248,9 +249,7 @@ public class TelaPaciente extends javax.swing.JFrame {
                     .addComponent(rbtnCarD))
                 .addGap(18, 18, 18)
                 .addGroup(PainelCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PainelCadastroLayout.createSequentialGroup()
-                        .addComponent(rbtnClassNorm)
-                        .addGap(130, 130, 130))
+                    .addComponent(rbtnClassNorm)
                     .addComponent(rbtnClassArch)
                     .addComponent(rbtnClassAsym)
                     .addGroup(PainelCadastroLayout.createSequentialGroup()
@@ -347,6 +346,13 @@ public class TelaPaciente extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnExcluirPaciente.setText("Excluir Paciente");
+        btnExcluirPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirPacienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -363,7 +369,10 @@ public class TelaPaciente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(13, 13, 13))
-                    .addComponent(btnEditar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluirPaciente))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNome)
@@ -400,16 +409,19 @@ public class TelaPaciente extends javax.swing.JFrame {
                             .addComponent(lblCPF)
                             .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEditar)
+                            .addComponent(btnExcluirPaciente))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPesquisar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(btnExcluir)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnPesquisar)
+                                .addComponent(btnExcluir))))
                     .addComponent(PainelCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(38, 38, 38))
         );
@@ -457,6 +469,10 @@ public class TelaPaciente extends javax.swing.JFrame {
         //AdicionaImagem();
     }//GEN-LAST:event_btnAdicionarImagemActionPerformed
 
+    private void btnExcluirPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirPacienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -500,6 +516,7 @@ public class TelaPaciente extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionarImagem;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnExcluirPaciente;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -549,14 +566,13 @@ public class TelaPaciente extends javax.swing.JFrame {
         txtNome.setText(nome);
         txtCPF.setText(cpf);
         id = id_paciente;
-        
+
         /*txtCarcTecido.setText(carcTecido);
         txtClassNorm.setText(classNorm);
         txtGravForm.setText(gravForm);
         txtX.setText(Integer.toString(x));
         txtY.setText(Integer.toString(y));
         txtRaio.setText(Integer.toString(raio));*/
-
         PacienteDAO pacienteDAO = new PacienteDAO();
 
         DefaultTableModel model = (DefaultTableModel) tabelaExame.getModel();
@@ -597,21 +613,31 @@ public class TelaPaciente extends javax.swing.JFrame {
     }
 
     private void EditarPaciente() {
-        
+
         String nome;
         String cpf;
-        
+
         nome = txtNome.getText().toUpperCase();
         cpf = txtCPF.getText();
-        
 
         Paciente pacienteDTO = new Paciente();
-        
+
         pacienteDTO.setNome(nome);
         pacienteDTO.setCpf(cpf);
         pacienteDTO.setId_paciente(id);
-        
+
         PacienteDAO pacienteDAO = new PacienteDAO();
         pacienteDAO.EditarPaciente(pacienteDTO);
     }
+
+    private void ExcluirPaciente() {
+
+        Paciente pacienteDTO = new Paciente();
+        
+        pacienteDTO.setId_paciente(id);
+        
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        //pacienteDAO.EditarPaciente(pacienteDTO);
+    }
+
 }
