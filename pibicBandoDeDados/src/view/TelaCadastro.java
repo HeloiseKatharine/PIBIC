@@ -5,7 +5,6 @@
  */
 package view;
 
-import dao.ExameDAO;
 import dao.PacienteDAO;
 import dto.Exame;
 import dto.Paciente;
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author heloh
+ * @author Heloise
  */
 public class TelaCadastro extends javax.swing.JFrame {
 
@@ -65,7 +64,6 @@ public class TelaCadastro extends javax.swing.JFrame {
         txtX = new javax.swing.JTextField();
         txtY = new javax.swing.JTextField();
         txtRaio = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         lblImagem = new javax.swing.JLabel();
         btnAdicionarImagem = new javax.swing.JButton();
         txtNomeCaminho = new javax.swing.JTextField();
@@ -122,8 +120,6 @@ public class TelaCadastro extends javax.swing.JFrame {
                 txtNomeActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Upload:");
 
         btnAdicionarImagem.setText("Add");
         btnAdicionarImagem.addActionListener(new java.awt.event.ActionListener() {
@@ -205,8 +201,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(lblCPF))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                            .addComponent(txtCPF))))
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,12 +220,8 @@ public class TelaCadastro extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2))))
+                                .addGap(48, 48, 48)
+                                .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(90, 90, 90)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCaracteristicaDoTecido)
@@ -289,9 +281,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
                         .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,15 +338,11 @@ public class TelaCadastro extends javax.swing.JFrame {
                         .addComponent(btnCadastrar)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnAdicionarImagem)
-                                .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdicionarImagem)
+                            .addComponent(txtNomeCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addComponent(lblImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                         .addGap(38, 38, 38))))
         );
 
@@ -365,7 +353,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
         Cadastrar();
@@ -377,42 +364,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
     private void btnAdicionarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarImagemActionPerformed
         // TODO add your handling code here:
-
-        JFileChooser arquivo = new JFileChooser();
-        arquivo.setDialogTitle("Selecione uma imagem");
-        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-        int opc = arquivo.showOpenDialog(this);
-
-        if (opc == JFileChooser.APPROVE_OPTION) {
-
-            File file = new File("Caminho");
-
-            file = arquivo.getSelectedFile();
-
-            try {
-                /*imagem = file.getAbsolutePath();
-                imagem = ImageIO.read(new File(caminhoImg));
-
-                 */
-                imagem = ImageIO.read(file);
-
-                fileName = file.getAbsolutePath();
-
-                txtNomeCaminho.setText(fileName);
-
-                ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile().getPath());
-
-                //Para mostrar a imagem
-                lblImagem.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_DEFAULT)));
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "TelaCadastro | ADD " + e);
-            }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo.");
-        }
+        AdicionaImagem();
     }//GEN-LAST:event_btnAdicionarImagemActionPerformed
 
     private void rbtnCarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnCarDActionPerformed
@@ -473,7 +425,6 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
@@ -511,103 +462,152 @@ public class TelaCadastro extends javax.swing.JFrame {
         try {
             String nome, cpf, caracteristicatecido, classeanormalidade, gravidadeanormalidade, stringX, stringY, stringRaio;
             Integer x, y, raio;
-            boolean open;
 
-            
             //pegando os dados do paciente
             nome = (txtNome.getText()).toUpperCase();
             cpf = txtCPF.getText();
 
             Paciente paciente = new Paciente();
+            Exame exame = new Exame();
 
             paciente.setNome(nome);
             paciente.setCpf(cpf);
 
-          
+            boolean img;
             //pegando os dados do exame 
-            if (rbtnCarF.isSelected()) {
-                caracteristicatecido = "F";
-            } else if (rbtnCarG.isSelected()) {
-                caracteristicatecido = "G";
-            } else {
-                caracteristicatecido = "D";
-            }
-
-            if (rbtnClassCalc.isSelected()) {
-                classeanormalidade = "CALC";
-            } else if (rbtnClassCirc.isSelected()) {
-                classeanormalidade = "CIRC";
-            } else if (rbtnClassSpic.isSelected()) {
-                classeanormalidade = "SPIC";
-            } else if (rbtnClassMisc.isSelected()) {
-                classeanormalidade = "MISC";
-            } else if (rbtnClassArch.isSelected()) {
-                classeanormalidade = "ARCH";
-            } else if (rbtnClassAsym.isSelected()) {
-                classeanormalidade = "ASYM";
-            } else {
-                classeanormalidade = "NORM";
-            }
-
-            
-            if (rbtnGravB.isSelected()) {
-                gravidadeanormalidade = "B";
-                open = true;//?
-            } else if (rbtnGravM.isSelected()) {
-                gravidadeanormalidade = "M";
-                open = true;//?
-            } else {
-                gravidadeanormalidade = "";
-                open = false;//?
+            if (txtNomeCaminho.getText().isEmpty()) {
                 
-            }
-
-            stringX = txtX.getText();
-            stringY = txtY.getText();
-            stringRaio = txtRaio.getText();
-
-            if (stringX.isEmpty()) {
-                x = null;
-            } else {
-                x = Integer.parseInt(stringX);
-            }
-
-            if (stringY.isEmpty()) {
-                y = null;
-            } else {
-                y = Integer.parseInt(stringY);
-            }
-
-            if (stringRaio.isEmpty()) {
+                img = false;
+                /*caracteristicatecido = "0";
+                classeanormalidade = "-";
+                gravidadeanormalidade = "-";
                 raio = null;
+                x = null;
+                y = null;
+                fileName = "";
+                // txtX.setEditable(false);*/
             } else {
-                raio = Integer.parseInt(stringRaio);
+                
+                img = true;
+                
+                //pegando os dados do exame 
+                if (rbtnCarF.isSelected()) {
+                    caracteristicatecido = "F";
+                } else if (rbtnCarG.isSelected()) {
+                    caracteristicatecido = "G";
+                } else {
+                    caracteristicatecido = "D";
+                }
+
+                if (rbtnClassCalc.isSelected()) {
+                    classeanormalidade = "CALC";
+                } else if (rbtnClassCirc.isSelected()) {
+                    classeanormalidade = "CIRC";
+                } else if (rbtnClassSpic.isSelected()) {
+                    classeanormalidade = "SPIC";
+                } else if (rbtnClassMisc.isSelected()) {
+                    classeanormalidade = "MISC";
+                } else if (rbtnClassArch.isSelected()) {
+                    classeanormalidade = "ARCH";
+                } else if (rbtnClassAsym.isSelected()) {
+                    classeanormalidade = "ASYM";
+                } else {
+                    classeanormalidade = "NORM";
+                }
+
+                if (rbtnGravB.isSelected()) {
+                    gravidadeanormalidade = "B";
+                } else if (rbtnGravM.isSelected()) {
+                    gravidadeanormalidade = "M";
+                } else {
+                    gravidadeanormalidade = "";
+                }
+
+                stringX = txtX.getText();
+                stringY = txtY.getText();
+                stringRaio = txtRaio.getText();
+
+                if (stringX.isEmpty()) {
+                    x = null;
+                } else {
+                    x = Integer.parseInt(stringX);
+                }
+
+                if (stringY.isEmpty()) {
+                    y = null;
+                } else {
+                    y = Integer.parseInt(stringY);
+                }
+
+                if (stringRaio.isEmpty()) {
+                    raio = null;
+                } else {
+                    raio = Integer.parseInt(stringRaio);
+                }
+
+                //pegando somente o nome da imagem
+                int tam = fileName.lastIndexOf("\\");
+                fileName = fileName.substring(tam + 1);
+
+                //salvando na pasta imagens
+                ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
+
+                //salvando nome no banco de dados
+                //exame.setNomeimagem(fileName);
+                exame.setCaracteristicatecido(caracteristicatecido);
+                exame.setClasseanormalidade(classeanormalidade);
+                exame.setGravidadeanormalidade(gravidadeanormalidade);
+                exame.setX(x);
+                exame.setY(y);
+                exame.setRaio(raio);
+                exame.setNomeimagem(fileName);
+
             }
-
-            Exame exame = new Exame();
-
-            exame.setCaracteristicatecido(caracteristicatecido);
-            exame.setClasseanormalidade(classeanormalidade);
-            exame.setGravidadeanormalidade(gravidadeanormalidade);
-            exame.setX(x);
-            exame.setY(y);
-            exame.setRaio(raio);
 
             //importando tudo para o PacienteDAO
             PacienteDAO pacientedao = new PacienteDAO();
-            pacientedao.cadastrarPaciente(paciente, exame);
+            pacientedao.cadastrarPaciente(paciente, exame,img);
 
-            //pegando somente o nome da imagem
-            int tam = fileName.lastIndexOf("\\");
-            fileName = fileName.substring(tam + 1);
-
-            //salvando na pasta imagens
-            ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
-            JOptionPane.showMessageDialog(rootPane, "Imagem enviada com sucesso");
+            JOptionPane.showMessageDialog(rootPane, "Cadastro realizado com sucesso.");
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "TelaCadastro | cadastrar " + e);
         }
     }
 
+    private void AdicionaImagem() {
+
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.setDialogTitle("Selecione uma imagem");
+        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int opc = arquivo.showOpenDialog(this);
+
+        if (opc == JFileChooser.APPROVE_OPTION) {
+
+            File file = new File("Caminho");
+
+            file = arquivo.getSelectedFile();
+
+            try {
+
+                imagem = ImageIO.read(file);
+
+                fileName = file.getAbsolutePath();
+
+                txtNomeCaminho.setText(fileName);
+
+                ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile().getPath());
+
+                //Para mostrar a imagem
+                lblImagem.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_DEFAULT)));
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "TelaCadastro | ADD " + e);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo.");
+        }
+    }
 }

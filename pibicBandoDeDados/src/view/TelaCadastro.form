@@ -49,8 +49,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtNome" pref="255" max="32767" attributes="0"/>
-                          <Component id="txtCPF" max="32767" attributes="0"/>
+                          <Component id="txtNome" pref="313" max="32767" attributes="0"/>
+                          <Component id="txtCPF" pref="313" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,15 +74,9 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtNomeCaminho" min="-2" pref="304" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                      <Component id="lblImagem" min="-2" pref="332" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                              <Component id="lblImagem" min="-2" pref="332" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
@@ -164,9 +158,9 @@
                       <Component id="txtCPF" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -233,18 +227,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="btnAdicionarImagem" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNomeCaminho" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAdicionarImagem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeCaminho" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblImagem" pref="251" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="lblImagem" pref="266" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -330,11 +318,6 @@
     <Component class="javax.swing.JTextField" name="txtY">
     </Component>
     <Component class="javax.swing.JTextField" name="txtRaio">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Upload:"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblImagem">
     </Component>
