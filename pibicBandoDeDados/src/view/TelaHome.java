@@ -6,15 +6,15 @@
 package view;
 
 import dao.PacienteDAO;
+import dto.Exame;
 import dto.Paciente;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-//import view.TelaPaciente;
 
 /**
  *
- * @author heloh
+ * @author Heloise
  */
 public class TelaHome extends javax.swing.JFrame {
 
@@ -51,7 +51,9 @@ public class TelaHome extends javax.swing.JFrame {
         lbl1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setExtendedState(6);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SISTEMA");
 
         btnCadastrar.setText("Cadastrar");
@@ -83,31 +85,28 @@ public class TelaHome extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(281, 281, 281)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnCadastrar)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 762, Short.MAX_VALUE)
                     .addComponent(btnPesquisar)
-                    .addComponent(jLabel1)
-                    .addComponent(btnCadastrar))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(222, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
-                        .addComponent(lbl1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblNome1)
-                        .addGap(6, 6, 6)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(214, 214, 214))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.CENTER, layout.createSequentialGroup()
+                            .addComponent(lbl1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblNome1)
+                            .addGap(6, 6, 6)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62)
+                .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -115,14 +114,14 @@ public class TelaHome extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl1)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(36, 36, 36)
                 .addComponent(btnPesquisar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCadastrar)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addContainerGap(285, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(790, 659));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,7 +134,6 @@ public class TelaHome extends javax.swing.JFrame {
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-
         PesquisarPaciente();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -184,8 +182,6 @@ public class TelaHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbl1;
     private javax.swing.JLabel lblNome1;
-    private javax.swing.JTextField lblNomePaciente1;
-    private javax.swing.JTextField lblNomePaciente2;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
@@ -196,7 +192,7 @@ public class TelaHome extends javax.swing.JFrame {
 
             String cpf, nome_paciente;
 
-            nome_paciente = txtNome.getText();
+            nome_paciente = txtNome.getText().toUpperCase();
             cpf = txtCPF.getText();
 
             Paciente pacienteDTO = new Paciente();
@@ -210,21 +206,35 @@ public class TelaHome extends javax.swing.JFrame {
 
             if (rsPacienteDAO.next()) {
 
-                // monstrar dados do paciente
+                //monstrar dados do paciente
                 try {
-                    if (pacienteDAO.mostrarPaciente(pacienteDTO)) {
+                    Exame exameDTO = new Exame();
+
+                    if (pacienteDAO.mostrarPaciente(pacienteDTO, exameDTO)) {
 
                         if (pacienteDTO != null) {
 
                             TelaPaciente t = new TelaPaciente();
                             
+                           ArrayList<Exame> lista = pacienteDAO.listarExames(pacienteDTO);
+                                                   
+                            ArrayList<Exame> l  = lista;
                             String n = pacienteDTO.getNome();
                             String c = pacienteDTO.getCpf();
+                            Integer id_paciente = pacienteDTO.getId_paciente();
+                           
+                            String carcTecido = exameDTO.getCaracteristicatecido();
+                            String classNorm = exameDTO.getClasseanormalidade();
+                            String gravForm = exameDTO.getGravidadeanormalidade();
+                            Integer x = exameDTO.getX();
+                            Integer y = exameDTO.getY();
+                            Integer raio = exameDTO.getRaio();
                             
-                            t.mostrarValores(n, c);
 
+                            t.mostrarValores(n, c, carcTecido, classNorm, gravForm, x, y, raio, l, id_paciente);
+                                                                  
                             t.setVisible(true);
-                        }
+                         }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro na procura dos dados");
@@ -240,26 +250,4 @@ public class TelaHome extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "TelaHome Pesquisar Paciente: " + e);
         }
     }
-
-    //TESTE
-    public void mostrarPaciente(Paciente objPaciente) {
-
-        /*PacienteDAO pacienteDAO = new PacienteDAO();
-        
-        try {
-
-            //mostrar dados do paciente cadastrado 
-            if (pacienteDAO.pesquisarPaciente(pacienteDTO)) {
-                if (pacienteDAO != null) {
-                    telaPaciente.t
-                }
-            }
-
-            dispose();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Dados incorretos");
-        }*/
-    }
-
 }
