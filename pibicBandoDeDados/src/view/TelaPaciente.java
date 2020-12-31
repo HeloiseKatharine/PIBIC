@@ -9,9 +9,14 @@ import dao.PacienteDAO;
 import dto.Exame;
 import dto.Paciente;
 import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,6 +31,7 @@ public class TelaPaciente extends javax.swing.JFrame {
      */
     public TelaPaciente() {
         initComponents();
+        PainelCadastro.setVisible(false);
 
     }
 
@@ -43,6 +49,9 @@ public class TelaPaciente extends javax.swing.JFrame {
         rbtnGravM = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         btnPesquisar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
@@ -55,7 +64,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         tabelaExame = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAdicionarExame = new javax.swing.JButton();
         PainelCadastro = new javax.swing.JPanel();
         btnAdicionarImagem = new javax.swing.JButton();
         txtNomeCaminho = new javax.swing.JTextField();
@@ -82,7 +91,7 @@ public class TelaPaciente extends javax.swing.JFrame {
         txtX = new javax.swing.JTextField();
         txtY = new javax.swing.JTextField();
         txtRaio = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         btnExcluirPaciente = new javax.swing.JButton();
 
         lblGravidadeDaFormalidade.setText("Gravidade da formalidade:");
@@ -153,7 +162,12 @@ public class TelaPaciente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Adicionar Exame");
+        btnAdicionarExame.setText("Adicionar Exame");
+        btnAdicionarExame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarExameActionPerformed(evt);
+            }
+        });
 
         btnAdicionarImagem.setText("Add");
         btnAdicionarImagem.addActionListener(new java.awt.event.ActionListener() {
@@ -168,10 +182,13 @@ public class TelaPaciente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbtnCarF);
         rbtnCarF.setText("F - Fatty");
 
+        buttonGroup1.add(rbtnCarG);
         rbtnCarG.setText("G - Fatty-glandular");
 
+        buttonGroup1.add(rbtnCarD);
         rbtnCarD.setText("D - Dense-glandular");
         rbtnCarD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +198,7 @@ public class TelaPaciente extends javax.swing.JFrame {
 
         lblCaracteristicaDoTecido.setText("Caracteristica do tecido: ");
 
+        buttonGroup2.add(rbtnClassSpic);
         rbtnClassSpic.setText("SPIC");
         rbtnClassSpic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,10 +206,13 @@ public class TelaPaciente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup2.add(rbtnClassMisc);
         rbtnClassMisc.setText("MISC");
 
+        buttonGroup2.add(rbtnClassArch);
         rbtnClassArch.setText("ARCH");
 
+        buttonGroup2.add(rbtnClassAsym);
         rbtnClassAsym.setText("ASYM");
         rbtnClassAsym.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,16 +220,21 @@ public class TelaPaciente extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup2.add(rbtnClassNorm);
         rbtnClassNorm.setText("NORM");
 
+        buttonGroup2.add(rbtnClassCalc);
         rbtnClassCalc.setText("CALC ");
 
+        buttonGroup2.add(rbtnClassCirc);
         rbtnClassCirc.setText("CIRC");
 
         lblClasseDaNormalidade.setText("Classe da normalidade:");
 
+        buttonGroup3.add(rbtnGravB1);
         rbtnGravB1.setText("B - Benign");
 
+        buttonGroup3.add(rbtnGravM1);
         rbtnGravM1.setText(" M - Malignant");
 
         lblGravidadeDaFormalidade1.setText("Gravidade da formalidade:");
@@ -221,7 +247,12 @@ public class TelaPaciente extends javax.swing.JFrame {
 
         jLabel3.setText("Coodenadas");
 
-        jButton4.setText("jButton4");
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PainelCadastroLayout = new javax.swing.GroupLayout(PainelCadastro);
         PainelCadastro.setLayout(PainelCadastroLayout);
@@ -238,7 +269,7 @@ public class TelaPaciente extends javax.swing.JFrame {
                 .addContainerGap(320, Short.MAX_VALUE))
             .addGroup(PainelCadastroLayout.createSequentialGroup()
                 .addGap(287, 287, 287)
-                .addComponent(jButton4)
+                .addComponent(btnCadastrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(PainelCadastroLayout.createSequentialGroup()
                 .addContainerGap()
@@ -342,7 +373,7 @@ public class TelaPaciente extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(rbtnClassNorm)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(btnCadastrar)
                 .addContainerGap())
         );
 
@@ -386,7 +417,7 @@ public class TelaPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(btnAdicionarExame)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PainelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
@@ -418,7 +449,7 @@ public class TelaPaciente extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(btnAdicionarExame)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnPesquisar)
                                 .addComponent(btnExcluir))))
@@ -441,6 +472,8 @@ public class TelaPaciente extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
+        ExcluirExame();
+        AtualizaTabela();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -466,12 +499,26 @@ public class TelaPaciente extends javax.swing.JFrame {
 
     private void btnAdicionarImagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarImagemActionPerformed
         // TODO add your handling code here:
-        //AdicionaImagem();
+        AdicionaImagem();
     }//GEN-LAST:event_btnAdicionarImagemActionPerformed
 
     private void btnExcluirPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirPacienteActionPerformed
         // TODO add your handling code here:
+        ExcluirPaciente();
+        dispose();
     }//GEN-LAST:event_btnExcluirPacienteActionPerformed
+
+    private void btnAdicionarExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarExameActionPerformed
+        // TODO add your handling code here:
+        PainelCadastro.setVisible(true);
+    }//GEN-LAST:event_btnAdicionarExameActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // TODO add your handling code here:
+        Cadastrar();
+        PainelCadastro.setVisible(false);
+        AtualizaTabela();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,15 +560,18 @@ public class TelaPaciente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PainelCadastro;
+    private javax.swing.JButton btnAdicionarExame;
     private javax.swing.JButton btnAdicionarImagem;
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnExcluirPaciente;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -633,11 +683,213 @@ public class TelaPaciente extends javax.swing.JFrame {
     private void ExcluirPaciente() {
 
         Paciente pacienteDTO = new Paciente();
-        
+        Exame exameDTO = new Exame();
+
         pacienteDTO.setId_paciente(id);
-        
+
         PacienteDAO pacienteDAO = new PacienteDAO();
-        //pacienteDAO.EditarPaciente(pacienteDTO);
+        pacienteDAO.ExcluirPaciente(pacienteDTO, exameDTO);
     }
 
+    private void ExcluirExame() {
+
+        try {
+            String nome;
+
+            int setar = tabelaExame.getSelectedRow();
+
+            nome = tabelaExame.getModel().getValueAt(setar, 0).toString();
+
+            Exame exameDTO = new Exame();
+
+            exameDTO.setPaciente_idpaciente(id);
+            exameDTO.setNomeimagem(nome);
+
+            PacienteDAO pacienteDAO = new PacienteDAO();
+            pacienteDAO.ExcluirExame(exameDTO);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "TelaPaciente " + e);
+        }
+
+    }
+
+    private void AtualizaTabela() {
+
+        PacienteDAO pacienteDAO = new PacienteDAO();
+        Paciente pacienteDTO = new Paciente();
+        Exame exameDTO = new Exame();
+
+        pacienteDTO.setId_paciente(id);
+
+        ArrayList<Exame> lista = pacienteDAO.listarExames(pacienteDTO);
+
+
+        DefaultTableModel model = (DefaultTableModel) tabelaExame.getModel();
+        model.setNumRows(0);
+
+        for (int i = 0; i < lista.size(); i++) {
+            model.addRow(new Object[]{
+                lista.get(i).getNomeimagem(),
+                lista.get(i).getCaracteristicatecido(),
+                lista.get(i).getClasseanormalidade(),
+                lista.get(i).getGravidadeanormalidade(),
+                lista.get(i).getRaio(),
+                lista.get(i).getX(),
+                lista.get(i).getY()
+            /* exameDTO.getNomeimagem(),
+                exameDTO.getCaracteristicatecido(),
+                exameDTO.getClasseanormalidade(),
+                exameDTO.getGravidadeanormalidade(),
+                exameDTO.getRaio(),
+                exameDTO.getX(),
+                exameDTO.getY()*/
+            });
+        }
+    }
+
+    String fileName;
+    BufferedImage imagem;
+
+    private void AdicionaImagem() {
+
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.setDialogTitle("Selecione uma imagem");
+        arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int opc = arquivo.showOpenDialog(this);
+
+        if (opc == JFileChooser.APPROVE_OPTION) {
+
+            File file = new File("Caminho");
+
+            file = arquivo.getSelectedFile();
+
+            try {
+
+                imagem = ImageIO.read(file);
+
+                fileName = file.getAbsolutePath();
+
+                txtNomeCaminho.setText(fileName);
+
+                ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile().getPath());
+
+                //Para mostrar a imagem
+                lblImagem.setIcon(new ImageIcon(imagem.getImage().getScaledInstance(lblImagem.getWidth(), lblImagem.getHeight(), Image.SCALE_DEFAULT)));
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "TelaCadastro | ADD " + e);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Voce nao selecionou nenhum arquivo.");
+        }
+    }
+
+    private void Cadastrar() {
+        try {
+            String cpf, caracteristicatecido, classeanormalidade, gravidadeanormalidade, stringX, stringY, stringRaio;
+            Integer x, y, raio;
+
+            cpf = txtCPF.getText();
+
+            Paciente paciente = new Paciente();
+            Exame exame = new Exame();
+
+            paciente.setId_paciente(id);
+            paciente.setCpf(cpf);
+
+            boolean img;
+            //pegando os dados do exame 
+            if (txtNomeCaminho.getText().isEmpty()) {
+
+                img = false;
+
+            } else {
+
+                img = true;
+
+                //pegando os dados do exame 
+                if (rbtnCarF.isSelected()) {
+                    caracteristicatecido = "F";
+                } else if (rbtnCarG.isSelected()) {
+                    caracteristicatecido = "G";
+                } else {
+                    caracteristicatecido = "D";
+                }
+
+                if (rbtnClassCalc.isSelected()) {
+                    classeanormalidade = "CALC";
+                } else if (rbtnClassCirc.isSelected()) {
+                    classeanormalidade = "CIRC";
+                } else if (rbtnClassSpic.isSelected()) {
+                    classeanormalidade = "SPIC";
+                } else if (rbtnClassMisc.isSelected()) {
+                    classeanormalidade = "MISC";
+                } else if (rbtnClassArch.isSelected()) {
+                    classeanormalidade = "ARCH";
+                } else if (rbtnClassAsym.isSelected()) {
+                    classeanormalidade = "ASYM";
+                } else {
+                    classeanormalidade = "NORM";
+                }
+
+                if (rbtnGravB.isSelected()) {
+                    gravidadeanormalidade = "B";
+                } else if (rbtnGravM.isSelected()) {
+                    gravidadeanormalidade = "M";
+                } else {
+                    gravidadeanormalidade = "";
+                }
+
+                stringX = txtX.getText();
+                stringY = txtY.getText();
+                stringRaio = txtRaio.getText();
+
+                if (stringX.isEmpty()) {
+                    x = null;
+                } else {
+                    x = Integer.parseInt(stringX);
+                }
+
+                if (stringY.isEmpty()) {
+                    y = null;
+                } else {
+                    y = Integer.parseInt(stringY);
+                }
+
+                if (stringRaio.isEmpty()) {
+                    raio = null;
+                } else {
+                    raio = Integer.parseInt(stringRaio);
+                }
+
+                //pegando somente o nome da imagem
+                int tam = fileName.lastIndexOf("\\");
+                fileName = fileName.substring(tam + 1);
+
+                //salvando na pasta imagens
+                ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
+
+                //salvando nome no banco de dados
+                exame.setCaracteristicatecido(caracteristicatecido);
+                exame.setClasseanormalidade(classeanormalidade);
+                exame.setGravidadeanormalidade(gravidadeanormalidade);
+                exame.setX(x);
+                exame.setY(y);
+                exame.setRaio(raio);
+                exame.setNomeimagem(fileName);
+            }
+
+            //importando tudo para o PacienteDAO
+            PacienteDAO pacientedao = new PacienteDAO();
+            pacientedao.cadastrarExame(paciente, exame, img);
+
+            JOptionPane.showMessageDialog(rootPane, "Cadastro realizado com sucesso.");
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "TelaCadastro | cadastrar " + e);
+        }
+    }
 }
