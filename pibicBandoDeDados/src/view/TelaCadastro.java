@@ -476,20 +476,13 @@ public class TelaCadastro extends javax.swing.JFrame {
             boolean img;
             //pegando os dados do exame 
             if (txtNomeCaminho.getText().isEmpty()) {
-                
+
                 img = false;
-                /*caracteristicatecido = "0";
-                classeanormalidade = "-";
-                gravidadeanormalidade = "-";
-                raio = null;
-                x = null;
-                y = null;
-                fileName = "";
-                // txtX.setEditable(false);*/
+
             } else {
-                
+
                 img = true;
-                
+
                 //pegando os dados do exame 
                 if (rbtnCarF.isSelected()) {
                     caracteristicatecido = "F";
@@ -553,7 +546,6 @@ public class TelaCadastro extends javax.swing.JFrame {
                 ImageIO.write(imagem, "jpg", new File("..\\imagens\\" + fileName));
 
                 //salvando nome no banco de dados
-                //exame.setNomeimagem(fileName);
                 exame.setCaracteristicatecido(caracteristicatecido);
                 exame.setClasseanormalidade(classeanormalidade);
                 exame.setGravidadeanormalidade(gravidadeanormalidade);
@@ -566,7 +558,7 @@ public class TelaCadastro extends javax.swing.JFrame {
 
             //importando tudo para o PacienteDAO
             PacienteDAO pacientedao = new PacienteDAO();
-            pacientedao.cadastrarPaciente(paciente, exame,img);
+            pacientedao.cadastrarPaciente(paciente, exame, img);
 
             JOptionPane.showMessageDialog(rootPane, "Cadastro realizado com sucesso.");
 
