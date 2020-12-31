@@ -30,11 +30,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="jLabel1" alignment="2" max="32767" attributes="0"/>
-                  <Group type="102" alignment="2" attributes="0">
-                      <Component id="btnEnter" min="-2" pref="87" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                      <Component id="btnCriarLogin" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnEnter" alignment="2" min="-2" pref="87" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -72,10 +68,7 @@
                   <Component id="txtSenha" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCriarLogin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEnter" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnEnter" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="222" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -106,14 +99,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEnterActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnCriarLogin">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCriarLoginActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtSenha">
