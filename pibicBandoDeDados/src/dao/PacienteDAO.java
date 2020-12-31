@@ -2,6 +2,7 @@ package dao;
 
 import dto.Exame;
 import dto.Paciente;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,6 +68,49 @@ public class PacienteDAO {
 
                 pstm.setString(7, objExame.getNomeimagem());
                 pstm.setString(8, objPaciente.getCpf());
+
+                pstm.execute();
+                pstm.close();
+
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "PacienteDAO " + e);
+            }
+        }
+    }
+
+    public void cadastrarExame(Paciente objPaciente, Exame objExame, boolean img) {
+        String sql = " insert into exame (caracteristicatecido,classeanormalidade,gravidadeanormalidade, x, y, raio, nomeimagem,paciente_cpf,  paciente_idpaciente) values(?, ?, ?, ?, ?, ?, ?,?, ?); ";
+
+        conn = new ConexaoDAO().conexaoBD();
+        if (img == true) {
+
+            try {
+                pstm = conn.prepareStatement(sql);
+                pstm.setString(1, objExame.getCaracteristicatecido());
+                pstm.setString(2, objExame.getClasseanormalidade());
+                pstm.setString(3, objExame.getGravidadeanormalidade());
+
+                if (objExame.getX() == null) {
+                    pstm.setNull(4, Types.INTEGER);
+                } else {
+                    pstm.setInt(4, objExame.getX());
+                }
+
+                if (objExame.getY() == null) {
+                    pstm.setNull(5, Types.INTEGER);
+                } else {
+                    pstm.setInt(5, objExame.getY());
+                }
+
+                if (objExame.getRaio() == null) {
+                    pstm.setNull(6, Types.INTEGER);
+                } else {
+                    pstm.setInt(6, objExame.getRaio());
+                }
+
+                pstm.setString(7, objExame.getNomeimagem());
+                pstm.setString(8, objPaciente.getCpf());
+                pstm.setInt(9, objPaciente.getId_paciente());
 
                 pstm.execute();
                 pstm.close();
@@ -157,11 +201,11 @@ public class PacienteDAO {
 
         conn = new ConexaoDAO().conexaoBD();
 
-        String sql = "select * from exame where paciente_cpf = ?;";
+        String sql = "select * from exame where  paciente_idpaciente = ?";
 
         try {
             pstm = conn.prepareStatement(sql);
-            pstm.setString(1, objPaciente.getCpf());
+            pstm.setInt(1, objPaciente.getId_paciente());
 
             rs = pstm.executeQuery();
 
@@ -192,18 +236,92 @@ public class PacienteDAO {
 
         try {
             pstm = conn.prepareStatement(sql);
-            
+
             pstm.setString(1, objPaciente.getCpf());
             pstm.setString(2, objPaciente.getNome());
             pstm.setInt(3, objPaciente.getId_paciente());
-            
+
             pstm.execute();
             pstm.close();
+            JOptionPane.showMessageDialog(null, "Editado com sucesso.");
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "PacienteDAO " + e);
         }
     }
+
+    public void ExcluirPaciente(Paciente objPaciente, Exame objExame) {
+
+        String sql = "delete from  exame where paciente_idpaciente = ?; ";
+        String sql2 = "delete from paciente where  idpaciente = ?; ";
+
+        conn = new ConexaoDAO().conexaoBD();
+
+        String nome = objExame.getNomeimagem();
+
+        //deleta a imagem na pasta
+        try {
+            File imagem = new File("..\\imagens\\" + nome);
+            imagem.delete();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "TelaPaciente " + e);
+        }
+
+        try {
+            pstm = conn.prepareStatement(sql);
+
+            pstm.setInt(1, objPaciente.getId_paciente());
+
+            pstm.execute();
+            pstm.close();
+
+            pstm2 = conn.prepareStatement(sql2);
+
+            pstm2.setInt(1, objPaciente.getId_paciente());
+
+            pstm2.execute();
+            pstm2.close();
+
+            JOptionPane.showMessageDialog(null, "Dados excluidos com sucesso");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PacienteDAO " + e);
+        }
+    }
+
+    public void ExcluirExame(Exame objExame) {
+
+        String sql = "delete from exame where paciente_idpaciente = ? and nomeimagem = ?;  ";
+
+        conn = new ConexaoDAO().conexaoBD();
+
+        //exclui da pasta
+        String nome = objExame.getNomeimagem();
+
+        //deleta a imagem na pasta
+        try {
+            File imagem = new File("..\\imagens\\" + nome);
+            imagem.delete();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PacienteDAO " + e);
+        }
+
+        try {
+
+            pstm = conn.prepareStatement(sql);
+
+            pstm.setInt(1, objExame.getPaciente_idpaciente());
+            pstm.setString(2,objExame.getNomeimagem());
+
+            pstm.execute();
+            pstm.close();
+
+            JOptionPane.showMessageDialog(null, "Exame excluido.");
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "PacienteDAO " + e);
+        }
+
+    }
 }
-
-
