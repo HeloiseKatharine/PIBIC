@@ -30,7 +30,6 @@ public class TelaHome extends javax.swing.JFrame {
     //construtor para mostrar dados do paciente 
     public TelaHome(TelaPaciente t) {
         this.tela = t;
-
     }
 
     /**
@@ -215,33 +214,32 @@ public class TelaHome extends javax.swing.JFrame {
                         if (pacienteDTO != null) {
 
                             TelaPaciente t = new TelaPaciente();
-                            
-                           ArrayList<Exame> lista = pacienteDAO.listarExames(pacienteDTO);
-                                                   
-                            ArrayList<Exame> l  = lista;
+
+                            ArrayList<Exame> lista = pacienteDAO.listarExames(pacienteDTO);
+
+                            ArrayList<Exame> l = lista;
+
                             String n = pacienteDTO.getNome();
                             String c = pacienteDTO.getCpf();
                             Integer id_paciente = pacienteDTO.getId_paciente();
-                           
+
                             String carcTecido = exameDTO.getCaracteristicatecido();
                             String classNorm = exameDTO.getClasseanormalidade();
                             String gravForm = exameDTO.getGravidadeanormalidade();
                             Integer x = exameDTO.getX();
                             Integer y = exameDTO.getY();
                             Integer raio = exameDTO.getRaio();
-                            
 
                             t.mostrarValores(n, c, carcTecido, classNorm, gravForm, x, y, raio, l, id_paciente);
-                                                                  
+
                             t.setVisible(true);
-                         }
+                        }
                     }
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro na procura dos dados");
                 }
 
-                dispose();
-
+                //dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Dados incorretos");
             }
