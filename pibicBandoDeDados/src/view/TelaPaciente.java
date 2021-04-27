@@ -124,6 +124,7 @@ public class TelaPaciente extends javax.swing.JFrame {
 
         txtCPF.setDisabledTextColor(new java.awt.Color(51, 51, 51));
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Tela Paciente");
 
