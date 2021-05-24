@@ -1,16 +1,12 @@
 import tensorflow as tf 
 from tensorflow import keras
-#Epocas               = 50
 import numpy as np 
-import os
-import random
 import cv2 as cv
 import matplotlib.pyplot as plt
 
 #localização das pastas do teste e do treino
-test = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\test' 
 train = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train'
-
+test = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\test' 
 
 #APAGAR
 #redimencionando as imagens 150 x 150
@@ -18,16 +14,10 @@ linhas = 224 #quantidade de linhas
 colunas = 224 #quantidade de colunas
 channels = 1  #1 = tons cinza
 
-
-#retorna uma lista com as imagens redimencionadas e uma lista com as labels
-
-
 IMAGE_SIZE = [224, 224]
 
-#****************************************************
-#vgg = keras.applications.vgg16.VGG16(input_shape= IMAGE_SIZE + [3], weights=None, include_top=False)
+#VGG16
 vgg = keras.applications.vgg16.VGG16(input_shape= IMAGE_SIZE + [3], weights='imagenet', include_top=False)
-#vgg = keras.applications.vgg16.VGG16(weights='imagenet', include_top=False)
 
 #vgg.input
 vgg.output
@@ -35,17 +25,10 @@ vgg.output
 for layer in vgg.layers:
   layer.trainable = False
 
-import glob
-
-folders = glob. glob('D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train\\*') #pasta de treino
-print(len(folders))
-
-
 x = keras.layers.Flatten()(vgg.output)
-prediction = keras.layers.Dense(len(folders), activation='softmax')(x)
+prediction = keras.layers.Dense(2, activation='softmax')(x) #duas classes
 model = keras.Model(inputs=vgg.input, outputs=prediction)
 model.summary()
-
 
 adam = keras.optimizers.Adam()
 
@@ -62,7 +45,6 @@ train_datagen = keras.preprocessing.image.ImageDataGenerator(
     zoom_range=0.2,
     horizontal_flip=True,
     fill_mode='nearest')
-
 
 test_datagen = keras.preprocessing.image.ImageDataGenerator(
     preprocessing_function= keras.applications.vgg16.preprocess_input,
@@ -84,34 +66,18 @@ test_set = test_datagen.flow_from_directory(test,
                                             batch_size = 2,
                                             class_mode = 'categorical')
 
-
-
 import datetime
 
-
-'''
-tf.keras.callbacks.ModelCheckpoint(
-    filepath, monitor='val_loss', verbose=0, save_best_only=False,
-    save_weights_only=False, mode='auto', save_freq='epoch',
-    options=None, **kwargs
-)
-
-'''
 checkpoint = keras.callbacks.ModelCheckpoint(filepath='mymodel.h5',
                                verbose=2, save_best_only=True)
-
-#checkpoint = keras.callbacks.ModelCheckpoint(filepath='mymodel.h5',
-#                               verbose=2, save_best_only=False, save_freq='epoch')
 
 callbacks = [checkpoint]
 
 start = datetime.datetime.now()
 
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> INICIO da Parte de Treinamento >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
 '''
+
 model_history=model.fit_generator(
   train_set,
   validation_data=test_set,
@@ -122,13 +88,11 @@ model_history=model.fit_generator(
 
 
 duration = datetime.datetime.now() - start
-print("Training completed in time: ", duration)                                          
+print("Duração do treinamento da rede: ", duration)                                          
 
 
-
-# Plot training & validation loss values
+#gráfico 
 plt.plot(model_history.history['accuracy'])
-#plt.plot(model_history.history['val_accuracy'])
 plt.title('CNN Model accuracy values')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
@@ -141,7 +105,7 @@ plt.show()
 
 
 
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Incio do teste >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TESTANDO A REDE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 img = keras.preprocessing.image.load_img("mdb092.PNG",target_size=(224,224)) #M
@@ -149,56 +113,24 @@ img = np.asarray(img)
 plt.imshow(img)
 img = np.expand_dims(img, axis=0)
 
-
 saved_model = keras.models.load_model("mymodel.h5")
-#output = saved_model.predict(img) 
 output = model.predict(img)
 
 print(output)
 
-
 class_names = sorted(train_set.class_indices.items(), key = lambda pair:pair[1])
+predict = model.predict_generator(img)
+argmax = np.argmax(predict)
+class_name = class_names[argmax]
+#print(class_names)
 
-print(class_names)
-
-predict_res = model.predict_generator(img)
-predict_id = np.argmax(predict_res)
-predict_label = class_names[predict_id]
-
-#print(predict_label)
-print(predict_label[0])
-#print(predict_label[1])
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIM do teste >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-#APAGAR 
-
-#****
-
-#label = keras.applications.vgg16.decode_predictions(output, top =1)
-#print(label)
-
-#label = keras.applications.vgg16.decode_predictions(output)
-
-#label = label[0][0]
-
-#print('%s (%.2f%%)' % (label[1], label[2]*100))
-
-#****
-
-'''
-
-if output[0][0] > output[0][1]:
-    print("Maligno")
-    print(prediction )
-    print(layer)
-    print(folders)
-    print(model)
-
-else:
+if(argmax == 0):
     print('Benigno')
-''' 
 
-#predict_res = model.predict_generator(img)
-#print(predict_res)
 
+if(argmax == 1):
+     print("Maligno")
+
+print(predict)
+print(argmax )
+print(class_name)
