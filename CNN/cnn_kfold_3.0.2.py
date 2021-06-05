@@ -35,33 +35,79 @@ treino_B = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train\\B'
 treino_M = ['D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train\\M\\{}'.format(i) for i in os.listdir(treino_M)]
 treino_B = ['D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train\\B\\{}'.format(i) for i in os.listdir(treino_B)]
 
-print('********TESTE**********')
+#labels data_train
 
-data_train = treino_B + treino_M
-for i in range(len(data_train)):
-  print(i)
-  
-
-
+data_train_labels = []
 
 print('********TESTE**********')
-#print(treino_M)
 
-#for i in train:
-#  print(i)
+
+for i in treino_B:
+  data_train_labels.append(0)# benigno = 0 maligno = 1
+
+for i in treino_M:
+  data_train_labels.append(1)# benigno = 0 maligno = 1
+
+#**********************************************
+print(data_train_labels)
+print(len(treino_B))
+print(len(treino_M))
+print(len(data_train_labels))
+#**********************************************
+
+
+data_train = treino_B + treino_M #benigno e maligno 
 
 
 
 #**********************************************
+print('********TESTE**********')
+
+for i in range(len(data_train)):
+  print(data_train[i])
+
+print(len(data_train))
+print('********TESTE**********')
 
 
 
+
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> INICIO da validação cruzada >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+#**********************************************
 
 
 #validação cruzada
-#kf = KFold(n_splits = 5)
+
+Y = data_train_labels
+
+kf = KFold(n_splits = 5)
 #TESTAR LOGO 
-#kf = StratifiedKFold(n_split = 5,random_state = 7, shuffle = True)
+kf = StratifiedKFold(n_split = 5, random_state = 7, shuffle = True)
+
+
+idg = keras.preprocessing.image.ImageDataGenerator (width_shift_range= 0.1,
+                          height_shift_range= 0.1,
+                          zoom_range= 3.0,
+                          fill_mode= 'nearest',
+                          horizontal_flip= True,
+                          rescale= 1./224) 
+
+def get_model_name(k):
+  return 'model_'+str(k)+'.h5'
+
+vali_acuracia = []
+vali_loss = []
+
+salve_dir = '/saved_models/'
+fold_var = 1
+
+
+#**********************************************
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIM da validação cruzada >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 
 
 #Instanciando o modelo VGG16
@@ -180,6 +226,7 @@ output = model.predict(img)
 
 print('output')
 print(output)
+
 predictions = model.predict_generator(img)
 print('predictions')
 print(predictions)
@@ -188,42 +235,10 @@ print(np.argmax(predictions))
 
 print("**************************************")
 
-if(argmax == 0):
-    print('Benigno')
-
-
-if(argmax == 1):
-     print("Maligno")
-
-
-
-
-#APAGAR?
-'''
-print("*******************train_setjjnkhjhkjhk*******************")
-
-predictions = model.predict(test_set)
-model.__class__
-print(predictions[0])
-print(test_set[0])
-'''
-
-
-'''
-class_names = sorted(train_set.class_indices.items(), key = lambda pair:pair[1])
-predict = model.predict_generator(img)
-argmax = np.argmax(predict)
-class_name = class_names[argmax]
-#print(class_names)
+# benigno = 0 maligno = 1
 
 if(argmax == 0):
     print('Benigno')
 
-
 if(argmax == 1):
      print("Maligno")
-
-print(predict)
-print(argmax )
-print(class_name)
-'''
