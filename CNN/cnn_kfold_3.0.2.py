@@ -12,6 +12,10 @@
 # https://machinelearningmastery.com/how-to-configure-k-fold-cross-validation/
 # https://www.youtube.com/watch?v=LxvFuLDXUdk
 
+# https://medium.com/data-hackers/como-criar-k-fold-cross-validation-na-m%C3%A3o-em-python-c0bb06074b6b
+# https://medium.com/@edubrazrabello/cross-validation-avaliando-seu-modelo-de-machine-learning-1fb70df15b78
+# https://minerandodados.com.br/validacao-cruzada-aprenda-de-forma-simples-como-usar-essa-tecnica/
+
 from os import P_NOWAIT
 from numpy.core.defchararray import array, index
 from sklearn.utils.validation import check_random_state
