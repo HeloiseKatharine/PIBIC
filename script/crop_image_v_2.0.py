@@ -1,4 +1,4 @@
-#Retorna o ROI de imagems qualquer imagem mesmo as que não posuem as coordenadas
+#Retorna o ROI de imagems qualquer imagem mesmo as que não possuem as coordenadas
 #Separa os dados em duas pastas (B, M)
 
 import re
