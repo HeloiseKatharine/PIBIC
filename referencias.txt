@@ -175,3 +175,29 @@ https://www.youtube.com/watch?v=maiQf8ray_s
 https://mreza-rezaei.github.io/Keras-platform-for-deeplearning/
 
 https://notebook.community/judithfan/pix2svg/predict/triplet_features_for_image_retrieval
+
+
+
+*******************************************************************************************************************
+
+
+
+Confusion matrix = 
+
+https://stackoverflow.com/questions/50920908/get-confusion-matrix-from-a-keras-multiclass-model
+
+https://gist.github.com/RyanAkilos/3808c17f79e77c4117de35aa68447045
+
+https://living-sun.com/pt/python/730670-calculate-confusion_matrix-for-training-set-python-machine-learning-cross-validation-knn.html
+
+https://translate.google.com/translate?hl=pt-BR&sl=en&u=https://www.kaggle.com/sakarilukkarinen/demo-03-flow-from-dataframe&prev=search&pto=aue
+
+Sensibilidade = 
+
+Especificidade = 
+
+Curva roc = 
+
+https://paulovasconcellos.com.br/como-saber-se-seu-modelo-de-machine-learning-est%C3%A1-funcionando-mesmo-a5892f6468b
+
+https://medium.datadriveninvestor.com/k-fold-cross-validation-6b8518070833
