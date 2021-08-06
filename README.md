@@ -1,6 +1,6 @@
 # PIBIC
 
-### Sistema de apoio ao diagnótico de câncer de mama baseado em redes neurais convolucionais profundas
+### Sistema de apoio ao diagnóstico de câncer de mama baseado em redes neurais convolucionais profundas
 
 #
 ##
