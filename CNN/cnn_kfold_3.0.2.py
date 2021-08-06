@@ -1,21 +1,3 @@
-# fontes:
-# https://github.com/jeffheaton/t81_558_deep_learning/blob/master/t81_558_class_05_2_kfold.ipynb
-# https://medium.com/the-owl/k-fold-cross-validation-in-keras-3ec4a3a00538
-# https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.KFold.html
-# https://www.dobitaobyte.com.br/como-criar-um-dataset-para-deep-learning/
-# https://www.pyimagesearch.com/2018/05/07/multi-label-classification-with-keras/ 
-# https://vijayabhaskar96.medium.com/multi-label-image-classification-tutorial-with-keras-imagedatagenerator-cd541f8eaf24
-# https://keras.io/api/applications/vgg/#vgg16-function
-# https://keras.io/guides/transfer_learning/
-# https://algoritmosempython.com.br/cursos/programacao-python/listas/
-# https://machinelearningmastery.com/k-fold-cross-validation/
-# https://machinelearningmastery.com/how-to-configure-k-fold-cross-validation/
-# https://www.youtube.com/watch?v=LxvFuLDXUdk
-
-# https://medium.com/data-hackers/como-criar-k-fold-cross-validation-na-m%C3%A3o-em-python-c0bb06074b6b
-# https://medium.com/@edubrazrabello/cross-validation-avaliando-seu-modelo-de-machine-learning-1fb70df15b78
-# https://minerandodados.com.br/validacao-cruzada-aprenda-de-forma-simples-como-usar-essa-tecnica/
-
 from os import P_NOWAIT
 from numpy.core.defchararray import array, index
 from sklearn.utils.validation import check_random_state
@@ -31,9 +13,6 @@ from tensorflow.python.autograph.operators.py_builtins import print_
 
 
 from tensorflow.python.keras.backend import backend, clear_session
-
-#from tensorflow import backend, clear_session
-#from keras import backend , clear_session
 
 IMAGE_SIZE = [224, 224]#tamanho da entrada 
 
@@ -68,11 +47,7 @@ for i in treino_M:
 #**********************************************
 
 
-
-
 data_train = treino_B + treino_M #benigno e maligno 
-
-
 
 #**********************************************
 #print('********TESTE**********')
@@ -95,10 +70,6 @@ for i in range (0, len(data_train_labels)):
 #print(data_train_labels)
 
 #print('********TESTE**********')
-
-
-
-
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> INICIO da validação cruzada >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -154,13 +125,10 @@ for train_index, val_index in kf.split(data_train_labels):
     
     #************************************
 
-
-    #pegando os valores que vão ser treinados e validados 
     #treinamento_data, validacao_data = data_train_labels.iloc[train_index], data_train_labels.iloc[val_index]
     #treino
+    #pegando os valores que vão ser treinados e validados 
     treinamento_data, validacao_data = data_train_labels[train_index], data_train_labels[val_index]
-
-    #teste ??
 
 
     #************************************
@@ -195,7 +163,7 @@ for train_index, val_index in kf.split(data_train_labels):
 
     #compilando o model
     model.compile(
-        loss='binary_crossentropy',#usar esse loss?
+        loss='binary_crossentropy',#loss
         optimizer=adam,
         metrics=['accuracy'])
 
@@ -231,6 +199,14 @@ for train_index, val_index in kf.split(data_train_labels):
       target_size = (224, 224),
       batch_size = 2,
       class_mode = 'categorical')
+
+    '''
+    test_data = flow_from_dataframe(test,
+    directory = image_dir,
+    x_col = "filename", y_col = "label", 
+    class_mode = "categorical", 
+    s)
+    '''
 
     '''
     checkpoint = keras.callbacks.ModelCheckpoint(
@@ -271,10 +247,9 @@ for train_index, val_index in kf.split(data_train_labels):
     results = dict(zip(model.metrics_names, results))
 
     VALI_ACURACIA.append(results['accuracy'])
-    VALI_LOSS.append(results
-
+    VALI_LOSS.append(results['loss'])
     
-    clear_session()
+    keras.backend.clear_session()
 
     fold_var +=1 
 
