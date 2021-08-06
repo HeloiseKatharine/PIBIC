@@ -1,3 +1,5 @@
+#Retorna o ROI de imagems que posuem as coordenadas
+
 import re
 from PIL import Image 
 import os, glob
@@ -5,7 +7,7 @@ caminho = "mini"
 formato = ".pgm"
 
 #criando uma pasta para armazenar a roi
-dir = './ROI'    
+dir = './ROI_teste'    
 file = os.makedirs(dir)
 names_duplicados = []
 
