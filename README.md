@@ -11,3 +11,4 @@
 * cnn_kfold_6.1ipynb (cnn com os dados M [maligno] e B [benigno e normal] | colab)
 
 
+* referencias (Referências ultilizadas)
