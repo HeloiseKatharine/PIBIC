@@ -12,3 +12,5 @@
 
 
 * referencias (Referências ultilizadas)
+
+* crop_image_v_2.0.py (Retorna o ROI de imagems qualquer imagem mesmo as que não possuem as coordenadas)
