@@ -7,10 +7,12 @@ import datetime
 
 IMAGE_SIZE = [224, 224]#tamanho da entrada 
 
-#localização das pastas do teste e do treino
-train = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\train'
-test = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\test' 
+#caminho das pastas do teste e do treino
+#train = 80%
+#test = 20%
 
+train = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\Treinamento_e_teste\\train' 
+test = 'D:\\heloh\\Documents\\MeuRepositorio\\PIBIC\\CNN\\Treinamento_e_teste\\test'
 
 #Instanciando o modelo VGG16
 vgg = keras.applications.vgg16.VGG16(
@@ -29,13 +31,13 @@ for layer in vgg.layers:
 x = keras.layers.Flatten()(vgg.output)
 prediction = keras.layers.Dense(2, activation='softmax')(x) #duas classes (B e M)
 model = keras.Model(inputs=vgg.input, outputs=prediction)
-model.summary()
+#model.summary() #imprime o summary
 
 adam = keras.optimizers.Adam()
 
 #compilando o model
 model.compile(
-  loss='binary_crossentropy',#usar esse loss?
+  loss='binary_crossentropy',
   optimizer=adam,
   metrics=['accuracy'])
 
@@ -107,34 +109,34 @@ plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
+
 '''
-
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FIM da Parte de Treinamento >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
 
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TESTANDO A REDE >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
+#Utilizando a imagem "mdb092.PNG" 
 img = keras.preprocessing.image.load_img("mdb092.PNG",target_size=(224,224)) #M
 img = np.asarray(img)
 plt.imshow(img)
 img = np.expand_dims(img, axis=0)
 
 saved_model = keras.models.load_model("mymodel.h5")
+
+#output and predictions
 output = model.predict(img)
-
-print('output')
-print(output)
-
 predictions = model.predict_generator(img)
-print('predictions')
-print(predictions)
-argmax = np.argmax(predictions)
-print(np.argmax(predictions))
 
-print("**************************************")
+print(f'\noutput = {output}')
+print(f'\npredictions = {predictions}\n')
+
+#classe
+argmax = np.argmax(predictions)
+print(np.argmax(predictions)) 
+
+print("*****************Resultado*****************")
 
 if(argmax == 0):
     print('Benigno')
