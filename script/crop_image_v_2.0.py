@@ -43,7 +43,6 @@ def calcula_quadrado(name_pasta, name, mb, x, y, r): #(x,y) = ponto | r = raio
         if(cont>1):
             name = name + "(" + str(cont) + ")"
 
-    print(f'*************\n{names_duplicados}\n*************')
     if mb == 'M':
         corte.save( dir_m + "/" + name +".PNG")#Salva o corte na pasta
     else:
