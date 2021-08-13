@@ -7,7 +7,7 @@ caminho = "mini"
 formato = ".pgm"
 
 #criando uma pasta para armazenar a roi
-dir = './ROI_teste'    
+dir = './ROI'    
 file = os.makedirs(dir)
 names_duplicados = []
 
@@ -97,6 +97,7 @@ lista_imagem = glob.glob(os.path.join(caminho , '*pgm'))
 
 #-----------------------Chama a função calcula_quadrado--------------------------
 
+
 for f in lista_imagem:
     for p in lista_coordenadas:
         aux = (caminho +"\\"+ p[0] + formato)#inserindo o nome da pasta e o formato da imagem
@@ -106,9 +107,14 @@ for f in lista_imagem:
             calcula_quadrado(aux, p[0], int(p[2]), int(p[1]), int(p[3]))
 
 #----------------------------Imagens sem ROI----------------------------------------
+
+#Para salvar as imagens que não possuem ROI
+
+'''
 for f in lista_imagem:
     for p in lista_sem_coordenadas:
         aux = (caminho +"\\"+ p[0] + formato)#inserindo o nome da pasta e o formato da imagem
         if(f == aux):
             #chama a função calcula_quadrado para realizar o corte das imagens
             salva_imagem(aux, p[0])
+'''
