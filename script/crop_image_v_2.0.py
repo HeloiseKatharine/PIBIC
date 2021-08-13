@@ -121,6 +121,7 @@ for f in lista_imagem:
             calcula_quadrado(aux, p[0], p[1], int(p[3]), int(p[2]), int(p[4])) #(name, m_b, x, y, raio)
 
 #----------------------------Imagens sem ROI----------------------------------------
+
 for f in lista_imagem:
     for p in lista_sem_coordenadas:
         aux = (caminho +"\\"+ p[0] + formato)#inserindo o nome da pasta e o formato da imagem
