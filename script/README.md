@@ -6,7 +6,7 @@
 ### Descrição de cada arquivo
 
 - crop_image.py (ROI):
-  - Retorna o ROI de imagems que posuem as coordenadas
+  - Retorna o ROI de imagens que possuem as coordenadas
   
 
 - crop_image_v_2.0.py (ROI_2):

@@ -1,4 +1,4 @@
-#Retorna o ROI de imagems que posuem as coordenadas
+#Retorna o ROI de imagens que possuem as coordenadas
 
 import re
 from PIL import Image 
@@ -6,7 +6,7 @@ import os, glob
 caminho = "mini"
 formato = ".pgm"
 
-#criando uma pasta para armazenar a roi
+#criando uma pasta para armazenar o ROI
 dir = './ROI'    
 file = os.makedirs(dir)
 names_duplicados = []
@@ -60,7 +60,7 @@ sequencia = ' '.join(arquivo)
 #dividindo as informações de cada imagem
 dados = re.split("\n", sequencia)
 
-#tirar os espaços em branco do inicio e do fim
+#tirar os espaços em branco do início e do fim
 for i in range(len(dados)):
     dados[i] = re.split(" ", dados[i])
     
@@ -80,7 +80,7 @@ for i in range((len(dados))):
         linha.append( dados[i][4])#x
         linha.append( dados[i][5])#y
         linha.append( dados[i][6])#raio
-        #insere as linha na lista de coordernadas     
+        #insere as linha na lista de coordenadas     
         lista_coordenadas.append(linha)
 
     elif((len(dados[i])-1) == 2):
@@ -92,7 +92,7 @@ for i in range((len(dados))):
 
 lista_imagem = []
 
-#pega todos os nomes de arquivo .pgm e o nome da pasta 
+#pega todos os nomes de arquivos .pgm e o nome da pasta 
 lista_imagem = glob.glob(os.path.join(caminho , '*pgm'))
 
 #-----------------------Chama a função calcula_quadrado--------------------------
@@ -102,7 +102,6 @@ for f in lista_imagem:
     for p in lista_coordenadas:
         aux = (caminho +"\\"+ p[0] + formato)#inserindo o nome da pasta e o formato da imagem
         if(f == aux):
-            #arruamar nomes iguais**
             #chama a função calcula_quadrado para realizar o corte das imagens
             calcula_quadrado(aux, p[0], int(p[2]), int(p[1]), int(p[3]))
 
