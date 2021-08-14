@@ -2,8 +2,6 @@
 
 ### Sistema de apoio ao diagnóstico de câncer de mama baseado em redes neurais convolucionais profundas
 
-#
-##
 
 ## Descrição dos arquivos contidos nesse repositório:
 
