@@ -6,9 +6,6 @@
 <img src="figura2.png"/> 
 <br>
 
-## Descrição dos arquivos contidos nesse repositório:
-
-* referencias (Referências ultilizadas)
 
 
 
